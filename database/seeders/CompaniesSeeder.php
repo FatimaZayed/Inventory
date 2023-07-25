@@ -41,5 +41,18 @@ class CompaniesSeeder extends Seeder
 
         'companytype_id'=>2,
 ]);
+
+
+Companies::create([
+    'Company_name' => 'Nami',
+    'Company_code'=>'123',
+    'Person_Name'=>'ibrahim',
+    'Email'=>'khafagyibrahim62@gmail.com',
+    'Position'=>'Backend',
+    'Phone'=>'0100000000',
+    'Company_Address'=>'Egypt',
+    //'Company_Logo'=>$faker->image('public\Company_Logo\Chainnest.png'),
+    'companytype_id'=>1,
+]);
     }
 }

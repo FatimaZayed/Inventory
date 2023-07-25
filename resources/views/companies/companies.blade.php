@@ -50,10 +50,10 @@
                         <table id="example" class="table key-buttons text-md-nowrap">
                             <thead>
                                 <tr class="table-success" style="text-align: center">
+
                                     <td><input type="checkbox" name="product" id="product"></td>
 
                                     <th class="border-bottom-0">id</th>
-
                                     <th class="border-bottom-0">Company_name</th>
                                     <th class="border-bottom-0">Company_code</th>
                                     <th class="border-bottom-0">Person_Name</th>
@@ -61,7 +61,6 @@
                                     <th class="border-bottom-0">Position</th>
                                     <th class="border-bottom-0">Phone</th>
                                     <th class="border-bottom-0">Company_type</th>
-
                                     <th class="border-bottom-0">Company_website</th>
                                     <th class="border-bottom-0">Company_Address</th>
                                     <th class="border-bottom-0">Company_Industry</th>
@@ -70,11 +69,8 @@
                                     <th class="border-bottom-0">Company_Logo</th>
                                     <th class="border-bottom-0">Action</th>
 
-
-
-
-
                                 </tr>
+
                             </thead>
                             <tbody>
                                 @foreach ($comp as $comp)
@@ -135,7 +131,6 @@
             </div>
         </div>
 
-
         <!-------------------------The action of model ajax--------------->
 
         <div class="modal" id="modaldemo8">
@@ -153,7 +148,6 @@
                             enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="row row-sm">
-
 
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Company_name <span class="tx-danger">*</span></label>
@@ -241,6 +235,7 @@
     </div>
     <!-- Container closed -->
     </div>
+    
     <!-- main-content closed -->
 @endsection
 @section('js')

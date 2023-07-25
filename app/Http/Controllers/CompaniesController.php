@@ -85,17 +85,19 @@ class CompaniesController extends Controller
     {
        // $id = $request->id;
 
-        $this->validate($request, [
+    //    dd($request);
+        // $this->validate($request, [
 
-            'Email' => 'required|max:255|unique:Companies,Email,',
-            'Company_name' => 'required|max:255|unique:Companies,Company_name,',
-        ],[
+        //     'Email' => 'required|max:255|unique:Companies,Email,',
+        //     'Company_name' => 'required|max:255|unique:Companies,Company_name,',
+        // ],[
 
-            'Email.required' =>'Please, Enter The Email ',
-            'Email.unique' =>'This Email is exist',
-            'Company_name.unique' =>'This Company name is exist',
+        //     'Email.required' =>'Please, Enter The Email ',
+        //     'Email.unique' =>'This Email is exist',
+        //     'Company_name.unique' =>'This Company name is exist',
 
-        ]);
+        // ]);
+
         if ($request->Company_code == "") {
             $request->merge([
                 'Company_code' => decbin(rand(1, 10000)),
@@ -108,6 +110,7 @@ class CompaniesController extends Controller
 
 
 
+        }
 
             $comp =new Companies([
             'Company_name' => $request->Company_name,
@@ -115,23 +118,20 @@ class CompaniesController extends Controller
             'Person_Name' => $request->Person_Name,
             'Email' => $request->Email,
             'Position' => $request->Position,
-
-            'Phone' => $request->Phone,
             'companytype_id' => $request->companytype_id,
-             "Company_Logo" =>$imageName,
+            'Phone' => $request->Phone,
+             "Company_Logo" =>$request->Company_Logo,
             'Company_website' => $request->Company_website,
             'Company_Address' => $request->Company_Address,
             'Business_Activity' => $request->Business_Activity,
             'Created_by' => (Auth::user()->name),
            // 'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
-
-
             // 'Approver_Name' => $request->Approver_Name,
             // 'Approver_date' => $request->Approver_date,
         ]);
         $comp->save();
-    }
+        
         return redirect('/companies')->with('create', 'Request Has Been created Successfully!');
     }
 

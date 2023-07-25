@@ -2,7 +2,6 @@
 
 @section('title')
     Control panel
-
 @stop
 
 @section('css')
@@ -560,7 +559,7 @@
                                         <p class="card-subtitle mg-b-15 tx-dark-15">Create your Categories</p>
                                         <p class="card-text">To publish/display your products in the system you must first
                                             do some steps <br> first create your categories & subcategory</p>
-                                        <h6>components -> Sections -> Categories </h6>
+                                        <h6>Products -> Categories </h6>
                                         <a class="card-link " href="{{ url('/' . ($page = 'Categories')) }}">Category</a>
                                     </div>
 
@@ -569,7 +568,7 @@
                                         <p class="card-subtitle mg-b-15 tx-dark-15">Create your Subcategories</p>
                                         <p class="card-text">To publish/display your products in the system you must first
                                             do some steps <br> first create your categories & subcategory</p>
-                                        <h6>components -> Sections -> Subcategories </h6>
+                                        <h6>Products -> Subcategories </h6>
                                         <a class="card-link "
                                             href="{{ url('/' . ($page = 'Subcategories')) }}">Subcategory</a>
                                     </div>

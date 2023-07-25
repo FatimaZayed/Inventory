@@ -104,19 +104,14 @@
                                                         <th class="border-bottom-0">Unit price</th>
                                                         <th class="border-bottom-0"> Total price</th>
                                                         <th class="border-bottom-0">transfer from/ Create </th>
-
                                                         <th class="border-bottom-0">Date of transfer from </th>
                                                         <th class="border-bottom-0"> transfer/create By </th>
-
-
-
                                                     </tr>
                                                 </thead>
                                           <tbody>
                                                     <?php $i = 0; ?>
                                                   @foreach ($products as $key => $products)
                                                        <?php $i++; ?>
-
                                                         <tr style="text-align: center">
                                                            <td>{{ $i }}</td>
                                                             <td> {{ $products->Product_name }}</td>
@@ -129,8 +124,6 @@
                                                         <td>{{$products->Created_by}}</td>
                                                         </tr>
                                                     @endforeach
-
-
 
                                                 </tbody>
 
@@ -151,11 +144,13 @@
                                 <tbody>
                                     <tr>
                                         <td>Numbers of products</td>
-                                        <td class="text-left">{{ App\Models\products::count() }} products</td>
+                                        {{-- <td class="text-left">{{ App\Models\products::count() }} products</td> --}}
+                                        <td> {{ App\Models\products::where("inventory_id",$inv->id)->count() }} products</td>
                                     </tr>
                                     <tr>
                                         <td><span>All QTY</span></td>
-                                        <td class="text-left text-muted"><span>{{number_format( App\Models\products::sum('QTY')),2 }}</span></td>
+                                        {{-- <td class="text-left text-muted"><span>{{number_format( App\Models\products::sum('QTY')),2 }}</span></td> --}}
+                                        <td> {{ App\Models\products::where("inventory_id",$inv->id)->sum('QTY'),2 }} products</td>
                                     </tr>
                                     <tr>
                                         <td><span>Number of Orders</span></td>

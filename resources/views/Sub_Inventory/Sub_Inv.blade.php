@@ -86,7 +86,8 @@
                                                {{---- {{ $inv->inv_name }}--}}
                                         </th>
                                         {{-- -{{$inv->pros->Product_name}} --}}
-                                        <td> {{ App\Models\products::count() }} products</td>
+                                        {{-- <td> {{ App\Models\products::count() }} products</td> --}}
+                                        <td> {{ App\Models\products::where("inventory_id",$inv->id)->count() }} products</td>
                                         <td>{{ $inv->address }}</td>
                                         <td>{{ $inv->Compa->Company_name }}</td>
                                         <td> {{ $inv->manager }}</td>
@@ -99,8 +100,6 @@
                                             <a href="invedit/{{ $inv->id }}" class="btn btn-warning ">Edit</a>
                                             <a href="show_inv/{{ $inv->id }}" class="btn btn-success ">View</a>
                                             <a href="inv-Summary/{{ $inv->id }}" class="btn btn-success ">Summary</a>
-
-
                                         </td>
 
                                     </tr>

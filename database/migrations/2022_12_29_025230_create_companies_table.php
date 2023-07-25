@@ -20,13 +20,13 @@ return new class extends Migration
             $table->string('Person_Name',45);
             $table->string('Email',45)->unique();
             $table->string('Position',45)->nullable();
-            $table->string('Phone',45);
+            $table->string('Phone',45)->nullable();
             $table->text('Company_Logo')->nullable();
             $table->string('Company_website',100)->nullable();
             $table->string('Company_Address',100);
             $table->string('Business_Activity',100)->nullable();
             //$table->string('Created_by', 45);
-                        $table->foreignId('companytype_id')->references('id')->on('companytype')->onDelete('cascade');
+            $table->foreignId('companytype_id')->references('id')->on('companytype')->onDelete('cascade');
 
 
             $table->softDeletes();
