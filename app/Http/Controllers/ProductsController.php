@@ -808,25 +808,23 @@ if($request->Reorder_QTY !=null){
 
 
 
-    /**************Fetch data in type = Materials and show it********************************** */
+    /**************Fetch data in type = Materials and show it (preshas list)********************************** */
 
     public function ShowMaterial()
     {
-        $products = products::with(['Categ', 'Subcat', 'Uni', 'Com', 'Type', 'curr'])->where('productype_id', 2);
+        $products = products::with(['Categ', 'Subcat', 'Uni', 'Com', 'Type', 'curr'])->where('productype_id', 2)->where('main_inventory', true);
 
         if (Auth::user()->companies_id == 1) {
             $products = $products->get();
+            
         } else {
             $products = $products->where('companies_id', Auth::user()->companies_id)->get();
         }
-
-                          return view('Products.inventory', compact('products'));
-
+        return view('Products.inventory', compact('products'));
         //return view('Products.inventory', compact('products'));
     }
 
-
-    /**************Fetch data in type = Finished_Product and show it********************************** */
+    /**************Fetch data in type = Finished_Product and show it (selling list)********************************** */
 
     public function ShowProduct()
     {

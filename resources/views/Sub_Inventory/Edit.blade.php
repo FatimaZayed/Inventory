@@ -26,7 +26,8 @@
                     <p class="mg-b-20">Please Edit the Required Data which you need to update it</p>
                     <div id="wizard1">
                         <h3>General Information</h3>
-                        <form action="updateInv/{{$inv->id}}" method="post" enctype="multipart/form-data">
+                        <form action=" {{ url('updateInv', ['id' => $inv->id]) }}"
+                             method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             <section>

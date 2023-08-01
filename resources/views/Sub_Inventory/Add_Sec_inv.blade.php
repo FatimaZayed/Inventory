@@ -48,10 +48,6 @@
 											<label class="form-label">Manager Phone <span class="tx-danger">*</span></label>
 											<input type="number" class="form-control required" placeholder="Manager Phone" name="Phone" id="Phone">
 										</div>
-                                        <div class="control-group form-group ">
-											<label class="form-label">QTY <span class="tx-danger">*</span></label>
-											<input type="number" class="form-control required" placeholder="Enter QTY" name="QTY" id="QTY">
-										</div>
                                         <div class="control-group form-group">
 											<label class="form-label">Manager Email <span class="tx-danger">*</span></label>
 											<input type="email" class="form-control required" placeholder="Manager Email"name="Email" id="Email">

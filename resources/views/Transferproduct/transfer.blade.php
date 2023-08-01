@@ -73,17 +73,9 @@
                             </div>
 
 
-
-
-
-
-
-
-
-
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label class="form-label">Product (Name)<span class="tx-danger"> *</span> </label>
+                                    <label class="form-label">Product (Name)<span class="tx-danger"></span> </label>
                                     <select name="Product_name" placeholder="Enter Product_name" class="form-control">
                                         <option value="{{ Request::get('keyword') }}">-- Select Product_name -- </option>
                                         @foreach ($products as $product)
@@ -113,7 +105,7 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Category <span
-                                            class="tx-danger"> *</span></label>
+                                            class="tx-danger"></span></label>
                                     <select name="categories_id" id="categories_id" class="form-control">
                                         <option value="" selected disabled> --Select Category--
                                         </option>
@@ -133,9 +125,9 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label class="form-label">Vendor <span class="tx-danger"> *</span></label>
+                                    <label class="form-label">Vendor <span class="tx-danger"></span></label>
                                     <select name="Vendor" id="vendor" class="form-control">
-                                        <option value="" selected disabled> --Select Category--
+                                        <option value="" selected disabled> --Select Vendor--
                                         </option>
                                         @foreach ($products as $product)
                                             <option value="{{ $product->id }}"
@@ -145,15 +137,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label class="form-label">QTY You need<span class="tx-danger">*</span></label>
-                                    <input class="form-control" name="QTY"  value="" placeholder="QTY"
-                                        type="text" readonly>
-                                </div>
-                                <div class="col-6">
-                                </div>
-                            </div>
+
                             <div class="col-6">
                                 <button class="btn btn-main-primary pd-x-20 mg-t-10" type="submit">Search</button>
                             </div>
@@ -191,7 +175,6 @@
                     <table id="example" class="table key-buttons text-md-nowrap">
                         <thead>
                             <tr class="table-success" style="text-align: center">
-
                                 <th class="border-bottom-0">ID</th>
                                 <th class="border-bottom-0">From Inventory</th>
                                 <th class="border-bottom-0">To Inventory</th>
@@ -208,7 +191,7 @@
                                 <th class="border-bottom-0">item Price</th>
                                 <th class="border-bottom-0">Total Price</th>
                                 <th class="border-bottom-0">Transfer Date</th>
-                                <th class="border-bottom-0">Person Name</th>
+                                {{-- <th class="border-bottom-0">Person Name</th> --}}
                                 <th class="border-bottom-0">ٍStatus</th>
                                 <th class="border-bottom-0">Action</th>
                             </tr>
@@ -225,7 +208,7 @@
                                        <select name="To_inv" placeholder="Enter Inventory_name" class="form-control" required>
                                             <option class="To_inv" value="">-- Select Inventory_name --</option>
                                             @foreach ($inv as $data)
-                                                <option value="" >
+                                                <option value="{{ $products->id }}">
                                                     {{ $data->inv_name }}</option>
                                             @endforeach
                                         </select>
@@ -239,19 +222,19 @@
                                     <td>{{ $products->product_code }}</td>
                                     <td>{{ $products->BIN }}</td>
                                     <td>{{ number_format($products->QTY) }}</td>
-                                    <td><input type="text" name="delivery_QTY" value="{{ $products->delivery_QTY }}"   data-pk="{{ $products->id }}" data-title="Enter Drivary_QTY" required></td>
-                                    {{-- <input type="hidden" name="delivery_QTY" value="{{ $products->delivery_QTY }}"> --}}
+                                    <td><input type="number" name="delivery_QTY" value="{{ $products->delivery_QTY }}"  data-pk="{{ $products->id }}" data-title="Enter Drivary_QTY" required> </td>
                                     <td>{{ $products->Categ->Category }}</td>
                                     <td>{{ $products->Subcat->Subcategory }}</td>
                                     <td>{{ number_format($products->Price, 2) }} {{ $products->curr->name }}</td>
                                     <td>{{ number_format($products->TotalPrice, 2) }} {{ $products->curr->name }}</td>
                                     <td>16/05/2023</td>
-                                    <td>{{ $products->Product_Manager }}</td>
-                                    <input type="hidden" name="Consumption" value="{{ $products->Product_Manager }}">
+                                    {{-- <td>{{ $products->Product_Manager}}</td>
+                                    <input type="hidden" name="Product_Manager" value="{{ $products->Product_Manager }}"> --}}
                                     <td> Open(Not Approved)</td>
                                     <td>
                                         <button type="submit" class="btn btn-success">Confirm</button>
-                                        <a href="" class="btn btn-warning ">Edit</a>
+                                    <P> </P>
+                                        {{-- <a href="" class="btn btn-warning ">Edit</a> --}}
                                         <a href="" class="btn btn-danger"> Delete</a>
                                     </td>
                                 </tr>
@@ -259,11 +242,6 @@
                             @endforeach
                         </tbody>
                     </table>
-
-
-
-
-
 
 
 
@@ -304,6 +282,9 @@
     <!-- main-content closed -->
 @endsection
 @section('js')
+    <!------------------------------------QTY---------------------------------------->
+
+
     <!--Internal  Select2 js -->
     <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
     <!--Internal  Parsley.min js -->
@@ -353,6 +334,8 @@
 
         });
     </script>
+
+
 
 
 
@@ -468,64 +451,7 @@
 
 
 
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jquery-editable/js/jquery-editable-poshytip.min.js">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script>
-        $.fn.poshytip = {
-            defaults: null
-        }
-    </script>
 
-
-
-    <script type="text/javascript">
-        $.fn.editable.defaults.mode = 'inline';
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            }
-        });
-
-        $('.update_record').editable({
-            url: "{{ route('Product.updateAjex1') }}",
-            type: 'text',
-            name: 'Product_name',
-            pk: 1,
-            title: 'Enter Field'
-
-
-
-
-
-        });
-    </script>
-    <!------------------------ The new Stock =QTY -consumption QTY---------------------------->
-    <script>
-        function myFunction() {
-            var QTY = parseFloat(document.getElementById("QTY").value);
-            var Consumption = parseFloat(document.getElementById("Consumption").value);
-            var Result = parseFloat(document.getElementById("QTY").value);
-
-            var Result = QTY - Consumption;
-
-            if (typeof QTY === 'undefined' || !QTY) {
-
-                alert('Please, Enter the QTY');
-
-            } else {
-
-                var Result = QTY - Consumption;
-                sumq = parseFloat(Result).toFixed(2);
-                document.getElementById("QTY").value = sumq;
-
-
-
-            }
-        }
-    </script>
 
     <!----------------------------------------------Call Subcategory from Category--------------------------------------------------------------------->
 

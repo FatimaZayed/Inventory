@@ -422,9 +422,6 @@
         title: 'Enter Field'
 
 
-
-
-
     });
 
 
@@ -448,9 +445,6 @@
                 var Result = QTY - Consumption;
                 sumq = parseFloat(Result).toFixed(2);
                 document.getElementById("QTY").value = sumq;
-
-
-
             }
         }
         </script>

@@ -93,24 +93,21 @@ class SecondaryInventoryController extends Controller
 
         //  $password = bin2hex(random_bytes(8)); 'Inventory_Type'=>'Sub'
 
-        // $count_sub = inventory::where(Auth::user()->companies_id)->count();
-        // if ($count_sub < 6 )
-        // {
-
-        $newinv = inventory::create([
-            'companies_id' => Auth::user()->companies_id,
-            'inv_name' => $request->inv_name,
-            'address' => $request->address,
-            'Email' => $request->Email,
-            'Phone' => $request->Phone,
-            'manager' => $request->manager,
-            'Inventory_Type' => InventoryType::Sub,
-
-            'users_id' => (Auth::user()->id),
-            'Created_by' => (Auth::user()->name),
-            'created_at' => date('Y-m-d H:i:s'),
-
-        ]);
+        $count_sub = inventory::where("companies_id", Auth::user()->companies_id)->count();
+        if ($count_sub < 5 || Auth::user()->companies_id == 1) {
+            $newinv = inventory::create([
+                'companies_id' => Auth::user()->companies_id,
+                'inv_name' => $request->inv_name,
+                'address' => $request->address,
+                'Email' => $request->Email,
+                'Phone' => $request->Phone,
+                'manager' => $request->manager,
+                'Inventory_Type' => InventoryType::Sub,
+                'users_id' => (Auth::user()->id),
+                'Created_by' => (Auth::user()->name),
+                'created_at' => date('Y-m-d H:i:s'),
+            ]);
+        }
         $newinv->save();
 
         /* $user=User::create([
@@ -118,13 +115,11 @@ class SecondaryInventoryController extends Controller
             'name' => $reqs->manager,
             'password' => Hash::make($password),
             'Phone' => $reqs->Phone,
-
             'companies_id'=>Auth::user()->companies_id,
             'Status' => "Active",
         ]);
         $user->assignRole(3);
         $reqs->update(['status_id'=>2]);
-
         $mailData = [
             'title' => 'Dear Valued Guest ',
             'body' => "<p>Thank you for your registration to Chain Nest Inventory Management System</p>
@@ -136,8 +131,6 @@ class SecondaryInventoryController extends Controller
             <p>Check the link http://185.207.251.223:8181/</p>
             <p> Note:Please login with your temporary password and it's a must change it in first step after login </p>
             <p>you can replay to this Email if you face isusse: admin.inventory@chainnest.net</p>"
-
-
          ];*/
 
         // $inv= inventory::where('status_id','=',1)->with(['Status'])->get();
@@ -151,7 +144,6 @@ class SecondaryInventoryController extends Controller
      * @param  \App\Models\secondary_inventory  $secondary_inventory
      * @return \Illuminate\Http\Response
      */
-
     /////////////////// show all sub inv. contents from view button //////////////////////////
     public function allcontents(Request $request, $id)
     {
@@ -167,7 +159,6 @@ class SecondaryInventoryController extends Controller
         }
 
         //
-
 
         if ($request->get('status') == 'archived') {
             $products = $products->onlyTrashed();
@@ -283,6 +274,7 @@ class SecondaryInventoryController extends Controller
     ////////////////////////// update//////////////////////////
     public function Updateinv(Request $request, $id)
     {
+
         $id = $request->id;
         //$inv =inventory::find($id);
         DB::table('inventory')->where('id', $request->id)->update([
@@ -293,14 +285,9 @@ class SecondaryInventoryController extends Controller
             'Email' => $request->Email,
             'Phone' => $request->Phone,
             'manager' => $request->manager,
-            'Inventory_Type' => $request->Sub,
             'users_id' => (Auth::user()->id),
-
             'Created_by' => (Auth::user()->name),
             'created_at' => date('Y-m-d H:i:s'),
-
-
-
         ]);
         // return redirect('/home')->with('success', 'Request has been updated Successfully!');
         return back()->with('message', 'Item updated successfully!');
@@ -421,35 +408,15 @@ class SecondaryInventoryController extends Controller
     //     return view('Transferproduct.confirmation', compact('product'));
     // }
 
-    public function confirm(Request $request, $id)
-    {
-        // dd($request);
-        $product = products::find($id);
-        $transaction = new Transaction([
-            'delivery_QTY' => $request['delivery_QTY'],
-            'From_inv' => $request['From_inv'],
-            'To_inv' => $request['To_inv'],
-            'users_id' => auth()->user()->id,
-            'transactiontypes_id' => 1,
-            'products_id' => $product->id,
-            // 'inventory_id' => $request['id']
-        ]);
-            $transaction->save();
-            
-            $to_inventory = Inventory::where('name', $request['To_inv'])->first();
-            if ($to_inventory) {
-                $to_inventory->quantity += $request['delivery_QTY'];
-                $to_inventory->save();
-            } else {
-                $to_inventory = new Inventory([
-                    'name' => $request['To_inv'],
-                    'quantity' => $request['delivery_QTY']
-                ]);
-                $to_inventory->save();
-            }
-        // redirect to the previous page with a success message
-        return view('Transferproduct/confirmation', compact('transaction', 'product'));
-    }
+
+
+    // public function update(Request $request)
+    // {
+
+    // }
+
+
+
 
 
 

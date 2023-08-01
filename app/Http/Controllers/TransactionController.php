@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\inventory;
+use App\Models\products;
 use App\Models\transaction;
 use Illuminate\Http\Request;
 
@@ -16,6 +18,57 @@ class TransactionController extends Controller
     {
         //
     }
+
+    public function confirm(Request $request, $id)
+    {
+        $product = products::find($id);
+        $transaction = new transaction([
+            'delivery_QTY' => $request['delivery_QTY'],
+            'From_inv' => $request['From_inv'],
+            'To_inv' => $request->get('To_inv'),
+            'users_id' => auth()->user()->id,
+            'transactiontypes_id' => 1,
+            'products_id' => $product->id,
+            'inventory_id' => $request['id'],
+            'Created_by' => $request['Created_by']
+        ]);
+        $transaction->save();
+        $newQty = $product->QTY - $request['delivery_QTY'];
+        $product->QTY = $newQty;
+        $product->save();
+        $product = products::find($id);
+
+        $inventory = inventory::find($request->get('To_inv'));
+        if ($inventory) {
+            $new_qty = $inventory->QTY + $request['delivery_QTY'];
+            $inventory->QTY = $new_qty;
+            $inventory->save();
+        } else {
+            $to_inv_product = products::where('inventory_id', $request->get('To_inv'))
+                ->where('id', $product->id)->first();
+
+        // dd($request);
+        //     if (!$to_inv_product) {
+
+        //         $to_inv_product = new products([
+        //             'product_name' => $product->product_name,
+        //             'description' => $product->description,
+        //             'price' => $product->price,
+        //             'QTY' => $request['delivery_QTY'],
+        //             'inventory_id' => $request->get('To_inv'),
+        //         ]);
+        //         $to_inv_product->save();
+        //     } else {
+
+        //         $to_inv_product->QTY += $request['delivery_QTY'];
+        //         $to_inv_product->save();
+        //     }
+        }
+        return view('Transferproduct/confirmation', compact('transaction', 'product'));
+    }
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -69,7 +122,6 @@ class TransactionController extends Controller
      */
     public function update(Request $request, transaction $transaction)
     {
-        //
     }
 
     /**

@@ -9,7 +9,6 @@ use App\Models\Companytype;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,8 +19,6 @@ class CompaniesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-
 
      function __construct()
     {
@@ -131,7 +128,7 @@ class CompaniesController extends Controller
             // 'Approver_date' => $request->Approver_date,
         ]);
         $comp->save();
-        
+
         return redirect('/companies')->with('create', 'Request Has Been created Successfully!');
     }
 

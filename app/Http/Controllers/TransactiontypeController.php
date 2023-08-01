@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\products;
+use App\Models\Transaction;
 use App\Models\transactiontype;
 use Illuminate\Http\Request;
 
@@ -37,6 +39,9 @@ class TransactiontypeController extends Controller
     {
         //
     }
+
+
+
 
     /**
      * Display the specified resource.

@@ -118,6 +118,7 @@ Route::get('product-show/{id}', [App\Http\Controllers\ProductsController::class,
 Route::get('product-user/{id}/user/{user_id}', [App\Http\Controllers\ProductsController::class, 'singleshowwituser'])->name('show.productwithuser');
 
 Route::post('Product-Ajax1', [App\Http\Controllers\ProductsController::class, 'update'])->name('Product.updateAjex1');
+Route::post('trans-Ajax1', [App\Http\Controllers\TransactionController::class, 'confirm'])->name('transferupdateAjex1');
 //Route::post('product-barcode', [App\Http\Controllers\ProductsController::class, 'store'])->name('barcode.product');
 
 
@@ -306,7 +307,8 @@ Route::get('show_inv/{id}', [App\Http\Controllers\SecondaryInventoryController::
 Route::get('inv-Summary/{id}', [App\Http\Controllers\SecondaryInventoryController::class, 'Summary'])->name('Summary.inv');//summary of the inv
 Route::get('inv-transactions', [App\Http\Controllers\SecondaryInventoryController::class, 'transa'])->name('transactions.inv');
 Route::get('Transfer', [App\Http\Controllers\SecondaryInventoryController::class, 'transfer'])->name('trans.inv');
-Route::post('confirm-trans/{id}', [App\Http\Controllers\SecondaryInventoryController::class, 'confirm'])->name('confirm-trans');
+Route::post('confirm-trans/{id}', [App\Http\Controllers\TransactionController::class, 'confirm'])->name('confirm-trans');
+// Route::post('confirm-trans/{id}', [App\Http\Controllers\TransactionController::class, 'confirm'])->name('confirm-trans');
 Route::get('get-inventory-qty', [App\Http\Controllers\SecondaryInventoryController::class,'getInventoryQty'])->name('getInventoryQty');
 
 

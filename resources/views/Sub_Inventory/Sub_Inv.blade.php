@@ -61,8 +61,6 @@
                                     <th class="border-bottom-0">Inventory Address</th>
                                     <th class="border-bottom-0">Company Name</th>
                                     <th class="border-bottom-0">INV_Manager Name</th>
-                                    <th class="border-bottom-0">All QTY</th>
-
                                     <th class="border-bottom-0">Total Price</th>
                                     <!--  <th class="border-bottom-0">Item Code</th>
                         <th class="border-bottom-0">order Date</th>
@@ -80,8 +78,8 @@
                                         <td>{{ $i }}</td>
                                         <th>
 
-                                          <a class="modal-effect" data-effect="effect-scale" data-toggle="modal"
-                                                href="#modaldemo8"> {{ $inv->inv_name }}</a>
+                                          <a class="moodal-effect"
+                                                href="show_inv/{{ $inv->id }}"> {{ $inv->inv_name }}</a>
 
                                                {{---- {{ $inv->inv_name }}--}}
                                         </th>
@@ -91,17 +89,13 @@
                                         <td>{{ $inv->address }}</td>
                                         <td>{{ $inv->Compa->Company_name }}</td>
                                         <td> {{ $inv->manager }}</td>
-                                        <td>{{ $inv->QTY}}</td>
-
                                         <td>{{ number_format(App\Models\products::sum('TotalPrice'), 2) }}</td>
-
                                         <td>{{ $inv->created_at }}</td>
                                         <td>
                                             <a href="invedit/{{ $inv->id }}" class="btn btn-warning ">Edit</a>
-                                            <a href="show_inv/{{ $inv->id }}" class="btn btn-success ">View</a>
+                                            {{-- <a href="show_inv/{{ $inv->id }}" class="btn btn-success ">View</a> --}}
                                             <a href="inv-Summary/{{ $inv->id }}" class="btn btn-success ">Summary</a>
                                         </td>
-
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -150,7 +150,7 @@
                                     <tr>
                                         <td><span>All QTY</span></td>
                                         {{-- <td class="text-left text-muted"><span>{{number_format( App\Models\products::sum('QTY')),2 }}</span></td> --}}
-                                        <td> {{ App\Models\products::where("inventory_id",$inv->id)->sum('QTY'),2 }} products</td>
+                                        <td> {{ App\Models\products::where("inventory_id",$inv->id)->sum('QTY'),2 }} </td>
                                     </tr>
                                     <tr>
                                         <td><span>Number of Orders</span></td>
